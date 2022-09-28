@@ -3,6 +3,7 @@ const app = express();
 const port = 3000;
 const bodyParser = require('body-parser');
 const { User } = require("./models/User");
+const config = require('./config/key')
 
 app.use(bodyParser.urlencoded({extended: true}));
 app.use(bodyParser.json());
@@ -10,7 +11,7 @@ app.use(bodyParser.json());
 require('dotenv').config();
 
 const mongoose = require('mongoose');
-mongoose.connect(`mongodb+srv://sanghoon:${process.env.MONGODB_PASSWORD}@express-ex.bucejoc.mongodb.net/?retryWrites=true&w=majority`)
+mongoose.connect(config.mongoURI)
   .then(() => console.log('몽고 연결 성공'))
   .catch(err => console.log(err))
 
